@@ -17,7 +17,7 @@ Until this is packaged properly, it can be retrived by adding the following to y
 "repositories": [
     {
         "type": "vcs",
-        "url":  "https://github.com/harveydobson/aws-cognito-laravel.git"
+        "url":  "https://github.com/harvouk/aws-cognito-laravel.git"
     }
 ```
 
