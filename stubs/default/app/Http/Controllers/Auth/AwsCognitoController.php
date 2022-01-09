@@ -77,4 +77,15 @@ class AwsCognitoController extends Controller
         return $client->confirm_signup($username, $confirmation_code);
 
     }
+
+    public function resend_confirmation_code (Request $request)
+    {
+        $username = $request->input('username');
+        $client = new CognitoClient();
+        $response = $client->resend_confirmation_code($username);
+        if($response['error'] == false)
+        {
+            return redirect(route('confirm_signup', ['username' => $username]));
+        }
+    }
 }

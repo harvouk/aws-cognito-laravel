@@ -132,6 +132,31 @@ class CognitoClient extends CognitoJWT
         }
     }
 
+    public function resend_confirmation_code($username)
+    {
+        $hash = $this->cognitoSecretHash($username);
+        try
+        {
+            $result = $this
+                ->client
+                ->resendConfirmationCode([
+                        'ClientId' => $this->client_id,
+                        'Username' => $username,
+                        'SecretHash' => $hash
+                    ]
+                );
+
+            $result = $result->toArray();
+
+            return ['error' => false, 'message' => 'SUCCESS', 'data' => $result];
+
+        }
+        catch(\Exception $e)
+        {
+            return ['error' => true, 'message' => $e->getMessage() ];
+        }
+    }
+
 
     public function logout($accessToken)
     {
