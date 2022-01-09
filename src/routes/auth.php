@@ -19,10 +19,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/forgot-password', [AwsCognitoController::class, 'forgotten_password_get'])->name('forgot_password');
     Route::post('/forgot-password', [AwsCognitoController::class, 'forgotten_password_post'])->name('forgot_password');
 
-    Route::get('/forgot-password-confirm', [AwsCognitoController::class, 'forgot_password_confirm_get'])->name('forgot_password_confirm');
-    Route::post('/forgot-password-confirm', [AwsCognitoController::class, 'forgot_password_confirm_post'])->name('forgot_password_confirm');
+    Route::get('/reset-password', [AwsCognitoController::class, 'forgot_password_confirm_get'])->name('forgot_password_confirm');
+    Route::post('/reset-password', [AwsCognitoController::class, 'forgot_password_confirm_post'])->name('forgot_password_confirm');
 
-    Route::get('/reset-password', [AwsCognitoController::class, 'reset_password_get'])->name('reset_password');
-    Route::post('/reset-password', [AwsCognitoController::class, 'reset_password_post'])->name('reset_password');
+});
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/get_devices', [AwsCognitoController::class, 'get_devices'])->name('get_devices');
 
 });

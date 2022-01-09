@@ -163,4 +163,15 @@ class AwsCognitoController extends Controller
         return $client->forgot_password_confirm($username, $password, $confirmation_code);
     }
 
+
+
+    /*
+     *  Get Devices
+     */
+
+    public function get_devices (Request $request)
+    {
+        //return $client->forgot_password_confirm($username, $password, $confirmation_code);
+    }
+
 }
