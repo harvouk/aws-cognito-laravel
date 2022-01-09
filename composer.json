@@ -1,0 +1,33 @@
+{
+    "name": "harvouk/aws-cognito-laravel",
+    "description": "A basic cognito plugin designed for Laravel",
+    "license": "Proprietary",
+    "authors": [
+        {
+            "name": "Harvey Dobson",
+            "email": "dev@harvo.uk"
+        }
+    ],
+
+    "minimum-stability": "dev",
+
+    "require": {
+        "aws/aws-sdk-php": "^3.209",
+        "firebase/php-jwt": "^5.5",
+        "phpseclib/phpseclib": "~2.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Harvouk\\AwsCognitoLaravel\\": "src"
+        }
+    },
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Harvouk\\AwsCognitoLaravel\\AwsCognitoProvider"
+            ]
+        }
+    }
+}
