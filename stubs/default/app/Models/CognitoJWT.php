@@ -1,6 +1,6 @@
 <?php
 
-namespace Harvouk\AwsCognitoLaravel;
+namespace App\Models;
 
 use Firebase\JWT\JWT;
 use phpseclib\Crypt\RSA;

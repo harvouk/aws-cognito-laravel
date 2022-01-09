@@ -1,8 +1,8 @@
 <?php
 
-namespace Harvouk\AwsCognitoLaravel;
+namespace App\Models;
 
-use Harvouk\AwsCognitoLaravel\CognitoJWT;
+use App\Models\CognitoJWT;
 
 class CognitoClient extends CognitoJWT
 {

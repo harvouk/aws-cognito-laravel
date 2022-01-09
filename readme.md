@@ -23,4 +23,13 @@ Until this is packaged properly, it can be retrived by adding the following to y
 
 And then running 
 
-`composer require harveydobson/aws-cognito-laravel`
+```
+composer require harveydobson/aws-cognito-laravel
+```
+
+
+Once composer has installed the package, you can activate it by running
+
+```
+php artisan cognito:install
+```
