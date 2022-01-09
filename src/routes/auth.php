@@ -15,8 +15,8 @@ Route::get('/register', function(Request $request) {
 
 Route::post('/register', [AwsCognitoController::class, 'register'])->name('register');
 
-Route::get('/verify', function(Request $request) {
-    return view('auth.verify', ['errors' => array()]);
-})->name('verify');
+Route::get('/confirm_signup', function(Request $request) {
+    return view('auth.confirm_signup', ['errors' => array()]);
+})->name('confirm_signup');
 
-Route::post('/verify', [AwsCognitoController::class, 'verify'])->name('verify');
+Route::post('/confirm_signup', [AwsCognitoController::class, 'confirm_signup'])->name('confirm_signup');

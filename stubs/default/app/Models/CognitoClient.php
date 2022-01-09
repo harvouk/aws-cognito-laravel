@@ -85,9 +85,6 @@ class CognitoClient extends CognitoJWT
 
     public function register($username, $password, $attributes)
     {
-        $faker = Factory::create();
-        $username = $faker->unique()->email;
-
         try
         {
             $result = $this
@@ -102,6 +99,32 @@ class CognitoClient extends CognitoJWT
                 );
 
             return ['error' => false, 'message' => 'SUCCESS', 'data' => $result];
+        }
+        catch(\Exception $e)
+        {
+            return ['error' => true, 'message' => $e->getMessage() ];
+        }
+    }
+
+    public function confirm_signup($username, $confirmation_code)
+    {
+        $hash = $this->cognitoSecretHash($username);
+        try
+        {
+            $result = $this
+                ->client
+                ->confirmSignUp([
+                        'ClientId' => $this->client_id,
+                        'ConfirmationCode' => $confirmation_code,
+                        'Username' => $username,
+                        'SecretHash' => $hash
+                    ]
+                );
+
+            $result = $result->toArray();
+
+            return ['error' => false, 'message' => 'SUCCESS', 'data' => $result];
+
         }
         catch(\Exception $e)
         {

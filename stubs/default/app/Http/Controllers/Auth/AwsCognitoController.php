@@ -61,9 +61,20 @@ class AwsCognitoController extends Controller
 
         if($response['error'] == false)
         {
-            return redirect(route('verify'));
+            return redirect(route('confirm_signup', ['username' => $username]));
         }
 
         return false;
+    }
+
+    public function confirm_signup (Request $request)
+    {
+        $username = $request->input('username');
+        $confirmation_code = $request->input('confirmation_code');
+
+        $client = new CognitoClient();
+
+        return $client->confirm_signup($username, $confirmation_code);
+
     }
 }
