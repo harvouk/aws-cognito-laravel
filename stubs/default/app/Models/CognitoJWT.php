@@ -17,9 +17,9 @@ class CognitoJWT extends CognitoIdentityProviderClient
             return $cognito_response['message'];
         }
 
-        $access_token = $cognito_response['data']['AuthenticationResult']['AccessToken'];
-        $refresh_token = $cognito_response['data']['AuthenticationResult']['RefreshToken'];
-        $id_token = $cognito_response['data']['AuthenticationResult']['IdToken'];
+        $access_token = !empty($cognito_response['data']['AuthenticationResult']['AccessToken']) ? $cognito_response['data']['AuthenticationResult']['AccessToken'] : '';
+        $refresh_token = !empty($cognito_response['data']['AuthenticationResult']['RefreshToken']) ? $cognito_response['data']['AuthenticationResult']['RefreshToken'] : '';
+        $id_token = !empty($cognito_response['data']['AuthenticationResult']['IdToken']) ? $cognito_response['data']['AuthenticationResult']['IdToken'] : '';
 
         return [
             'error' => $cognito_response['error'],

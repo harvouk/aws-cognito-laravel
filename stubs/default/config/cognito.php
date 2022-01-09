@@ -13,6 +13,13 @@ return [
     'user_pool_id'      => env('AWS_COGNITO_USER_POOL_ID', ''),
     'idp_endpoint'      => env('AWS_COGNITO_IDP_ENDPOINT', 'https://cognito-idp.%s.amazonaws.com/%s/.well-known/jwks.json'),
 
+    'required_fields' => [
+        'username' => 'required',
+        'given_name' => 'required',
+        'family_name' => 'required',
+        'password' => 'required'
+    ],
+
     // package configuration
     'use_sso'           => env('USE_SSO', false),
     'sso_user_fields'   => [

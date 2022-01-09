@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\CognitoJWT;
+use Faker\Factory;
 
 class CognitoClient extends CognitoJWT
 {
@@ -82,8 +83,11 @@ class CognitoClient extends CognitoJWT
     }
 
 
-    public function register(string $username, string $email, string $password, string $phone_number)
+    public function register($username, $password, $attributes)
     {
+        $faker = Factory::create();
+        $username = $faker->unique()->email;
+
         try
         {
             $result = $this
@@ -93,11 +97,7 @@ class CognitoClient extends CognitoJWT
                         'Username' => $username,
                         'Password' => $password,
                         'SecretHash' => $this->cognitoSecretHash($username) ,
-                        'UserAttributes' => [
-                            ['Name' => 'name', 'Value' => $username],
-                            ['Name' => 'email', 'Value' => $email],
-                            ['Name' => 'phone_number', 'Value' => $phone_number],
-                        ]
+                        'UserAttributes' => $attributes
                     ]
                 );
 
