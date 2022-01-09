@@ -2,27 +2,27 @@
 
 use App\Http\Controllers\Auth\AwsCognitoController;
 
-Route::get('/login', function(Request $request) {
-    return view('auth.login', ['errors' => array()]);
-})->name('login');
+Route::group(['middleware' => ['web']], function () {
 
-Route::post('/login', [AwsCognitoController::class, 'login'])->name('login');
+    Route::get('/login', [AwsCognitoController::class, 'login_get'])->name('login');
+    Route::post('/login', [AwsCognitoController::class, 'login_post'])->name('login');
 
+    Route::get('/register', [AwsCognitoController::class, 'register_get'])->name('register');
+    Route::post('/register', [AwsCognitoController::class, 'register_post'])->name('register');
 
-Route::get('/register', function(Request $request) {
-    return view('auth.register', ['errors' => array()]);
-})->name('register');
+    Route::get('/confirm-signup', [AwsCognitoController::class, 'confirm_signup_get'])->name('confirm_signup');
+    Route::post('/confirm-signup', [AwsCognitoController::class, 'confirm_signup_post'])->name('confirm_signup');
 
-Route::post('/register', [AwsCognitoController::class, 'register'])->name('register');
+    Route::get('/resend-confirmation-code', [AwsCognitoController::class, 'resend_confirmation_code_get'])->name('resend_confirmation_code');
+    Route::post('/resend-confirmation-code', [AwsCognitoController::class, 'resend_confirmation_code_post'])->name('resend_confirmation_code');
 
-Route::get('/confirm_signup', function(Request $request) {
-    return view('auth.confirm_signup', ['errors' => array()]);
-})->name('confirm_signup');
+    Route::get('/forgot-password', [AwsCognitoController::class, 'forgotten_password_get'])->name('forgot_password');
+    Route::post('/forgot-password', [AwsCognitoController::class, 'forgotten_password_post'])->name('forgot_password');
 
-Route::post('/confirm_signup', [AwsCognitoController::class, 'confirm_signup'])->name('confirm_signup');
+    Route::get('/forgot-password-confirm', [AwsCognitoController::class, 'forgot_password_confirm_get'])->name('forgot_password_confirm');
+    Route::post('/forgot-password-confirm', [AwsCognitoController::class, 'forgot_password_confirm_post'])->name('forgot_password_confirm');
 
-Route::get('/resend_confirmation_code', function(Request $request) {
-    return view('auth.resend_confirmation_code', ['errors' => array()]);
-})->name('resend_confirmation_code');
+    Route::get('/reset-password', [AwsCognitoController::class, 'reset_password_get'])->name('reset_password');
+    Route::post('/reset-password', [AwsCognitoController::class, 'reset_password_post'])->name('reset_password');
 
-Route::post('/resend_confirmation_code', [AwsCognitoController::class, 'resend_confirmation_code'])->name('resend_confirmation_code');
+});

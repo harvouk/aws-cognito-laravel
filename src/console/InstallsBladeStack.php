@@ -60,8 +60,6 @@ trait InstallsBladeStack
 
         copy(__DIR__.'/../../stubs/default/config/cognito.php', base_path('config/cognito.php'));
 
-        copy(__DIR__.'/../../stubs/default/resources/css/auth.css', resource_path('css/auth.css'));
-
         $this->info('Cognito scaffolding installed successfully.');
         $this->comment('Navigate to /cognito to get started');
     }

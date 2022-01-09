@@ -157,6 +157,58 @@ class CognitoClient extends CognitoJWT
         }
     }
 
+    public function forgotten_password($username)
+    {
+        $hash = $this->cognitoSecretHash($username);
+        try
+        {
+            $result = $this
+                ->client
+                ->forgotPassword([
+                        'ClientId' => $this->client_id,
+                        'Username' => $username,
+                        'SecretHash' => $hash
+                    ]
+                );
+
+            $result = $result->toArray();
+
+            return ['error' => false, 'message' => 'SUCCESS', 'data' => $result];
+
+        }
+        catch(\Exception $e)
+        {
+            return ['error' => true, 'message' => $e->getMessage() ];
+        }
+    }
+
+    public function forgot_password_confirm($username, $password, $confirmation_code)
+    {
+        $hash = $this->cognitoSecretHash($username);
+        try
+        {
+            $result = $this
+                ->client
+                ->confirmForgotPassword([
+                        'ClientId' => $this->client_id,
+                        'ConfirmationCode' => $confirmation_code,
+                        'Username' => $username,
+                        'Password' => $password,
+                        'SecretHash' => $hash
+                    ]
+                );
+
+            $result = $result->toArray();
+
+            return ['error' => false, 'message' => 'SUCCESS', 'data' => $result];
+
+        }
+        catch(\Exception $e)
+        {
+            return ['error' => true, 'message' => $e->getMessage() ];
+        }
+    }
+
 
     public function logout($accessToken)
     {
